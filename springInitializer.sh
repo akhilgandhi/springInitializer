@@ -179,8 +179,6 @@ reset
 
 # setup the above project in github and make a initial commit
 
-CURRENTDIR=$(pwd)
-
 # step 1: name of the remote repo. Enter a single word ..or.. separate with hyphens
 read -p "ENTER NAME YOU WANT TO GIVE TO YOUR REMOTE REPO? " repo_name
 
@@ -194,6 +192,8 @@ read -p "ENTER GITHUB USERNAME " username
 reset
 
 # step 3: goto local project folder path
+CURRENTDIR=$(pwd)
+
 cd ${CURRENTDIR}/${baseDir}
 
 # step 4: initialize repo locally, create blank README, add and commit
@@ -204,22 +204,14 @@ git commit -m "initial commit using shell script"
 
 echo "GIT REPO INITIALIZED "
 
-reset
-
 # step 5: use github API to log the user in
-curl -u ${username} https://api.github.com/user/repos -d "{\"name\": \"${repo_name}\", \"description\": \"${repo_description}\"}"
+curl -H 'Authorization: token 952e25d623ebe8621bab1355ec8e3e5a269381cf' https://api.github.com/user/repos -d "{\"name\": \"${repo_name}\", \"description\": \"${repo_description}\"}"
 
 # step 6: add the remote github repo to local repo and push
 git remote add origin https://github.com/${username}/${repo_name}.git
 git push --set-upstream origin master
 
 echo "PUSHED TO REMOTE REPO "
-
-reset
-
-# step 7: change to project's root directory
-CURRENTDIR=$(pwd)
-cd ${CURRENTDIR}/${baseDir}
 
 echo "Done. Go to https://github.com/$username/$repo_name to see."
 echo " *** You're now in you project root *** "
