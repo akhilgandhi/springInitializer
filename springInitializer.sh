@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#exec 1>>/home/akhil/Development/output.log
-#exec 2>>/home/akhil/Development/errors.log
+exec 1>>/home/akhil/Development/output.log
+exec 2>>/home/akhil/Development/errors.log
 
 reset
 
@@ -206,10 +206,10 @@ git commit -m "initial commit using shell script"
 
 echo "GIT REPO INITIALIZED "
 
-#read -p "ENTER GITHUB ACCESS TOKEN " access_token
+read -p "ENTER GITHUB ACCESS TOKEN " access_token
 
 # step 5: use github API to log the user in
-curl -H 'Authorization: token <i>access_token</i>' https://api.github.com/user/repos -d "{\"name\": \"${repo_name}\", \"description\": \"${repo_description}\"}"
+curl -H 'Authorization: token ${access_token}' https://api.github.com/user/repos -d "{\"name\": \"${repo_name}\", \"description\": \"${repo_description}\"}"
 
 # step 6: add the remote github repo to local repo and push
 git remote add origin https://github.com/${username}/${repo_name}.git
