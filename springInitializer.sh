@@ -1,7 +1,7 @@
 #!/bin/bash
 
-exec 1>>/home/akhil/Development/output.log
-exec 2>>/home/akhil/Development/errors.log
+#exec 1>>output.log
+exec 2>>errors.log
 
 reset
 
@@ -173,9 +173,9 @@ unzip -qq demo.zip
 
 rm -f demo.zip
 
-echo "NOW SETTING UP GITHUB REPO"
-
 reset
+
+echo "NOW SETTING UP GITHUB REPO"
 
 # setup the above project in github and make a initial commit
 
